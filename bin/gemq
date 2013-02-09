@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cache=~/bin/_rpmqa_cache #  cache file for `rpm -qa|sort`
+cache=~/bin/_gemlistr_cache #  cache file for `rpm -qa|sort`
 
 o=o # output (default on)
 r= # refresh
@@ -40,7 +40,7 @@ esac
 done
 
 # refresh cache if needed
-[ $r ] && rpm -qa|sort > $cache && chmod 664 $cache
+[ $r ] && gem list -r|sort > $cache && chmod 664 $cache
 
 # grep
 [ $i ] && grep -i "$GARG" $cache && exit
