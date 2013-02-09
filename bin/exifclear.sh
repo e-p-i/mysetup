@@ -1,0 +1,3 @@
+#!/bin/sh
+jhead -purejpg $*
+

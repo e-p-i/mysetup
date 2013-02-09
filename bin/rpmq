@@ -1,0 +1,51 @@
+#!/bin/sh
+
+cache=~/bin/_rpmqa_cache #  cache file for `rpm -qa|sort`
+
+r= # refresh
+o= # output
+g= # grep
+i= # grep case-insensitive
+
+while getopts frg:i:h option;do
+case "$option" in
+  f)
+    r=r
+    ;;
+  r)
+    r=r
+    o=
+    ;;
+  g)
+    g=g
+    GARG="$OPTARG"
+    ;;
+  i)
+    g=g
+    i=i
+    GARG="$OPTARG"
+    ;;
+  h)
+    echo \
+'options
+-f = force package refresh and output
+-r = package refresh only
+-g ARG = grep search
+-i ARG = grep search case-insensitive
+-h = show help (this)
+'
+    exit
+    ;;
+esac
+done
+
+# refresh cache if needed
+[ $r ] && rpm -qa|sort > $cache && chmod 664 $cache
+
+# grep
+[ $i ] && grep -i "$GARG" $cache && exit
+[ $g ] && grep "GARG" $cache $$ exit
+
+# output
+[ $o ] && cat $cache
+

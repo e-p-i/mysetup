@@ -1,0 +1,8 @@
+#!/bin/sh
+if [ -n "$1" ]
+then
+    yum install --skip-broken $* 
+else
+    yum upgrade --skip-broken
+fi
+
