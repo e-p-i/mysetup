@@ -43,8 +43,8 @@ done
 [ $r ] && rpm -qa|sort > $cache && chmod 664 $cache
 
 # grep
-[ $i ] && grep -i "$GARG" $cache && exit
-[ $g ] && grep "$GARG" $cache && exit
+[ $i ] && grep --color=auto -i "$GARG" $cache && exit
+[ $g ] && grep --color=auto "$GARG" $cache && exit
 
 # output
 [ $o ] && cat $cache
