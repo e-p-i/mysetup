@@ -1,8 +1,19 @@
 #!/bin/sh
-if [ -n "$1" ]
-then
-    yum install --skip-broken $* 
+
+y= #-y option flag for yum
+
+while getopts y option;do
+  case "$option" in
+    y)
+      y='-y'
+      shift `expr $OPTIND - 1`
+      ;;
+  esac
+done
+
+if [ -n "$1" ];then
+  yum install --skip-broken $y $*
 else
-    yum upgrade --skip-broken
+  yum upgrade --skip-broken $y
 fi
 
