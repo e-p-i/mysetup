@@ -10,6 +10,9 @@ do
     *.tar.bz2|*.tbz)
       tar xjvf "$1"
       ;;
+    *.tar.xz|*.txz)
+      tar xJvf "$1"
+      ;;
     *.zip|*.ZIP|*.Zip)
       ~/bin/unzip932.pl "$1"
       ;;

@@ -1,5 +1,5 @@
 #!/bin/sh
-
+renice 19 $$
 y= #-y option flag for yum
 
 while getopts y option;do
@@ -12,8 +12,8 @@ while getopts y option;do
 done
 
 if [ -n "$1" ];then
-  yum install --skip-broken $y $*
+  nice -19 yum install --skip-broken $y $*
 else
-  yum upgrade --skip-broken $y
+  nice -19 yum upgrade --skip-broken $y
 fi
 

@@ -1,0 +1,11 @@
+#!/bin/sh
+renice 19 $$
+#yum upgrade --skip-broken $*
+
+if [ $* ];then
+  nice -19 yum upgrade --exclude 'kernel*' --skip-broken $*
+else
+  nice -19 yum upgrade --exclude 'kernel*' --skip-broken \*
+fi
+
+

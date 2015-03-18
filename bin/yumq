@@ -1,5 +1,5 @@
 #!/bin/sh
-
+renice 19 $$
 cache=~/bin/_yumsearchall_cache #  cache file for `rpm -qa|sort`
 
 o=o # output (default on)
@@ -18,11 +18,12 @@ case "$option" in
     ;;
   g)
     g=g
+    o=
     GARG="$OPTARG"
     ;;
   i)
-    g=g
     i=i
+    o=
     GARG="$OPTARG"
     ;;
   h)
@@ -43,9 +44,9 @@ done
 [ $r ] && yum search all|sort > $cache && chmod 664 $cache
 
 # grep
-[ $i ] && grep --color=auto -i "$GARG" $cache && exit
-[ $g ] && grep --color=auto "$GARG" $cache && exit
+[ $i ] && egrep --color=auto -i "$GARG" $cache
+[ $g ] && egrep --color=auto "$GARG" $cache
 
 # output
-[ $o ] && cat $cache
+[ $o ] && echo "$(<$cache)"
 

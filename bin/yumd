@@ -1,5 +1,5 @@
 #!/bin/sh
-
+renice 19 $$
 y= #-y option flag for yum
 
 while getopts y option;do
